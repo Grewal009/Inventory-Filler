@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Filler</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>ITEMS</h2>
+      <div class="items">
+        <div onclick="add('ball1')" id="ball1" class="item">🏀</div>
+        <div onclick="add('ball2')" id="ball2" class="item">⚽️</div>
+        <div onclick="add('ball3')" id="ball3" class="item">🎾</div>
+        <div onclick="add('ball4')" id="ball4" class="item">🏐</div>
+      </div>
+      <div id="inventory"></div>
+    </div>
+
+    <script>
+      const ball1 = document.getElementById("ball1").innerHTML;
+      const ball2 = document.getElementById("ball2").innerHTML;
+      const ball3 = document.getElementById("ball3").innerHTML;
+      const ball4 = document.getElementById("ball4").innerHTML;
+      let ball11 = 0;
+      let ball22 = 0;
+      let ball33 = 0;
+      let ball44 = 0;
+
+      const inventory = document.getElementById("inventory");
+      const inventoryList = document.getElementById("inventoryList");
+
+      start();
+
+      function start() {
+        inventory.innerHTML =
+          /*HTML*/
+          `
+          <h2 onclick="openInventory()" class="heading">INVENTORY ⬇</h2>
+        `;
+      }
+
+      function openInventory() {
+        inventory.innerHTML =
+          /*HTML*/
+          `<h2 onclick="closeInventory()" class="heading">INVENTORY ⬆</h2>
+          <ul id="inventoryList">
+          <li>${ball1} <div class="btn"><button onclick="minus('ball1')">-</button><span>${ball11}</span> <button onclick="add('ball1')">+</button></div></li>
+          <li>${ball2} <div class="btn"><button onclick="minus('ball2')">-</button><span>${ball22}</span> <button onclick="add('ball2')">+</button></div></li>
+          <li>${ball3} <div class="btn"><button onclick="minus('ball3')">-</button><span>${ball33}</span> <button onclick="add('ball3')">+</button></div></li>
+          <li class="lastItem">${ball4} <div class="btn"><button onclick="minus('ball4')">-</button><span>${ball44}</span> <button onclick="add('ball4')">+</button></div></li>
+          </ul>`;
+      }
+
+      function add(item) {
+        if (item == "ball1") {
+          ball11++;
+        } else if (item == "ball2") {
+          ball22++;
+        } else if (item == "ball3") {
+          ball33++;
+        } else {
+          ball44++;
+        }
+        console.log(ball11, ball22, ball33, ball44);
+        openInventory();
+      }
+
+      function minus(item) {
+        if (item == "ball1") {
+          if (ball11 == 0) return;
+          ball11--;
+        } else if (item == "ball2") {
+          if (ball22 == 0) return;
+          ball22--;
+        } else if (item == "ball3") {
+          if (ball33 == 0) return;
+          ball33--;
+        } else {
+          if (ball44 == 0) return;
+          ball44--;
+        }
+        console.log(ball11, ball22, ball33, ball44);
+        openInventory();
+      }
+
+      function closeInventory() {
+        inventory.innerHTML =
+          /*HTML*/
+          `<h2 onclick="openInventory()"class="heading">INVENTORY ⬇</h2>
+          <ul id="inventoryList">
+          </ul>`;
+      }
+    </script>
+  </body>
+</html>
